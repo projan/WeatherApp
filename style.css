@@ -7,7 +7,7 @@ body{
     max-width: 400px;
 }
 .icon{
-    postion:relative;
+    position:relative;
     top: -50px;
     border-radius: 50%;
     width: 100px;
