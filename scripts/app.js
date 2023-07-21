@@ -1,3 +1,4 @@
+
 const cityForm = document.querySelector('form');
 const card = document.querySelector('.card');
 const details =document.querySelector('.details');
@@ -9,8 +10,8 @@ const updateUI = (data) =>{
     // const cityDets = data.cityDets;
     // const weather = data.weather;
 
-        //same as above ^
-        //destructure properties
+        // same as above ^
+        // destructure properties
         const { cityDets, weather } = data;
 
 
@@ -69,34 +70,23 @@ cityForm.addEventListener('submit', e => {
 updateCity(city)
      .then(data => updateUI(data))
      .catch(err=> console.log(err));
+
+
+    //set local storage
+     localStorage.setItem('city',city);
+
     
 });
 
-const key = 'dOjQvmCOEs0VrkGBeeZAgidgy6RqqLvk';
-
-//get weather information
-const getWeather = async(id)=>{
-    
-    const base = 'http://dataservice.accuweather.com/currentconditions/v1/';
-    const query = `${id}?apikey=${key}`;
-
-    const response = await fetch(base + query);
-    const data = await response.json();
-    return data[0];
-
-};
+if(localStorage.getItem('city')){
+    updateCity(localStorage.getItem('city'))
+    .then(data => updateUI(data))
+    .catch(err => console.log(err))
+}
 
 
-//get city information
-const getCity = async(city)=>{
-    const base = 'http://dataservice.accuweather.com/locations/v1/cities/search'
-    const query = `?apikey=${key}&q=${city}`;
 
-    const response = await fetch(base + query);
-    const data = await response.json();
-    return (data[0]);
 
-};
 
 // getCity()
 // .then(data => {
